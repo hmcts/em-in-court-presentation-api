@@ -94,3 +94,13 @@ task smoke(type: Test) {
 
 	environment("APPINSIGHTS_INSTRUMENTATIONKEY", "test-key")
 }
+
+bootJar {
+	baseName 'rpa-icp'
+	archiveName = "$baseName"+".jar"
+	destinationDir = file("$rootDir/build/libs")
+	manifest {
+		attributes 'Implementation-Title': project.name, 'Implementation-Version': project.version
+	}
+}
+
