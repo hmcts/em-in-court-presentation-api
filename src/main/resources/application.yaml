@@ -1,3 +1,8 @@
 spring:
   application:
     name: In court Presentation
+
+management:
+  endpoints:
+    web:
+      base-path: '/'
