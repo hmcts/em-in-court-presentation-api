@@ -19,6 +19,7 @@ apply plugin: 'com.github.ben-manes.versions'
 group = 'uk.gov.hmcts.reform.rpa'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+mainClassName = 'uk.gov.hmcts.reform.rpa.incourtpres.IncourtPresApplication'
 
 dependencyCheck {
 	// Specifies if the build should be failed if a CVSS score above a specified level is identified.
