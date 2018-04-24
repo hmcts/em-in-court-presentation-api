@@ -35,13 +35,21 @@ dependencyCheck {
 repositories {
 	mavenCentral()
 }
+def versions = [
+		postgresql         : '42.2.2',
+		springBoot         : '2.0.1.RELEASE',
+		hmctsJavaLogging   : '3.0.0'
+]
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-websocket')
-	compile('org.postgresql:postgresql:42.2.2')
+	compile("org.postgresql:postgresql:${versions.postgresql}")
+	compile("uk.gov.hmcts.reform:java-logging-spring:${versions.hmctsJavaLogging}")
+	compile("uk.gov.hmcts.reform:java-logging-httpcomponents:${versions.hmctsJavaLogging}")
+	compile("uk.gov.hmcts.reform:java-logging-appinsights:${versions.hmctsJavaLogging}")
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('com.h2database:h2:1.4.197')
