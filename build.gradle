@@ -61,3 +61,36 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('com.h2database:h2:1.4.197')
 }
+
+sourceSets {
+	aat {
+		java {
+			compileClasspath += main.output
+			runtimeClasspath += main.output
+			srcDir('src/aat/java')
+		}
+		resources {
+			srcDir('src/aat/resources')
+		}
+	}
+}
+
+task functional(type: Test) {
+	group = 'Delivery pipeline'
+	description = 'Executes functional tests against an AAT In Court Presentation instance'
+	setTestClassesDirs(sourceSets.aat.output.classesDirs)
+	setClasspath(sourceSets.aat.runtimeClasspath)
+	include "uk/gov/hmcts/reform/incourtpres/functional/**"
+
+	environment("APPINSIGHTS_INSTRUMENTATIONKEY", "test-key")
+}
+
+task smoke(type: Test) {
+	group = 'Delivery pipeline'
+	description = 'Executes non-destructive smoke tests against a running In Court Presentation instance'
+	setTestClassesDirs(sourceSets.aat.output.classesDirs)
+	setClasspath(sourceSets.aat.runtimeClasspath)
+	include "uk/gov/hmcts/reform/incourtpres/smoke/**"
+
+	environment("APPINSIGHTS_INSTRUMENTATIONKEY", "test-key")
+}
