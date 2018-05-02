@@ -17,6 +17,7 @@ module "app" {
   ilbIp = "${var.ilbIp}"
   subscription = "${var.subscription}"
   https_only="false"
+  capacity     = "${var.capacity}"
 
   app_settings = {
     POSTGRES_HOST = "${module.db.host_name}"
