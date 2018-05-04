@@ -18,7 +18,7 @@ module "app" {
   subscription        = "${var.subscription}"
   https_only          = "false"
   capacity            = "${var.capacity}"
-  enable_web_sockets = "true"
+  web_sockets_enabled = "true"
 
   app_settings = {
     POSTGRES_HOST = "${module.db.host_name}"
