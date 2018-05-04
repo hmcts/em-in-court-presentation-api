@@ -10,14 +10,15 @@ locals {
 # "${local.local_env}"
 
 module "app" {
-  source = "git@github.com:hmcts/moj-module-webapp?ref=master"
-  product = "${local.app_full_name}"
-  location = "${var.location}"
-  env = "${var.env}"
-  ilbIp = "${var.ilbIp}"
-  subscription = "${var.subscription}"
-  https_only="false"
-  capacity     = "${var.capacity}"
+  source              = "git@github.com:hmcts/moj-module-webapp?ref=master"
+  product             = "${local.app_full_name}"
+  location            = "${var.location}"
+  env                 = "${var.env}"
+  ilbIp               =  "${var.ilbIp}"
+  subscription        = "${var.subscription}"
+  https_only          = "false"
+  capacity            = "${var.capacity}"
+  enabled_web_sockets = "true"
 
   app_settings = {
     POSTGRES_HOST = "${module.db.host_name}"
