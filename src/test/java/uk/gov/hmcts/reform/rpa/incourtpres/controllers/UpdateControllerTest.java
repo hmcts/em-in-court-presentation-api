@@ -1,6 +1,5 @@
 package uk.gov.hmcts.reform.rpa.incourtpres.controllers;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,6 @@ import uk.gov.hmcts.reform.rpa.incourtpres.IncourtPresApplication;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -59,11 +57,12 @@ public class UpdateControllerTest {
         }).get(1, SECONDS);
 
         stompSession.subscribe(SUBSCRIBE_SCREEN_CHANGE, new CreateScreenChangeStompFrameHandler());
-        stompSession.send(SCREEN_CHANGE_PUBLISH, new ScreenChange(2));
+        stompSession.send(SCREEN_CHANGE_PUBLISH, new ScreenChange(2, "http://doc.com/documents/123"));
 
         ScreenChange screenChange = completableFuture.get(10, SECONDS);
 
         assertThat(screenChange.getPage(), equalTo(2));
+        assertThat(screenChange.getDocument(), equalTo("http://doc.com/documents/123"));
     }
 
     private List<Transport> createTransportClient() {
