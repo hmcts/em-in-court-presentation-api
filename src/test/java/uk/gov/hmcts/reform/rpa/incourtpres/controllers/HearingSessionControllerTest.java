@@ -43,12 +43,15 @@ public class HearingSessionControllerTest {
     public void should_persist_a_session() throws Exception {
 
         HearingSession session =
-                new HearingSession("My hearing", LocalDateTime.now(), Arrays.asList("lh@test.com"));
-        String locationHeader = mvc.perform(post("/sessions")
+                new HearingSession("My hearing",
+                        LocalDateTime.now(),
+                        Arrays.asList("http://docs.com/documents/123"),
+                        Arrays.asList("lh@test.com"));
+        String locationHeader = mvc.perform(post("/icp/sessions")
                 .content(objectMapper.writeValueAsString(session))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(header().string("location", containsString("/sessions/")))
+                .andExpect(header().string("location", containsString("/icp/sessions/")))
                 .andReturn()
                 .getResponse()
                 .getHeader("location");

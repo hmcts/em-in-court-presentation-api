@@ -10,20 +10,24 @@ public class HearingSession {
     private String description;
     private LocalDateTime dateOfHearing;
     private List<String> participants;
+    private List<String> documents;
 
     public HearingSession(UUID id,
                           String description,
                           LocalDateTime dateOfHearing,
+                          List<String> documents,
                           List<String> participants) {
         this.id = id;
         this.description = description;
         this.dateOfHearing = dateOfHearing;
+        this.documents = documents;
         this.participants = participants;
     }
 
-    public HearingSession(String description, LocalDateTime dateOfHearing, List<String> participants) {
+    public HearingSession(String description, LocalDateTime dateOfHearing, List<String> documents, List<String> participants) {
         this.description = description;
         this.dateOfHearing = dateOfHearing;
+        this.documents = documents;
         this.participants = participants;
     }
 
@@ -61,5 +65,13 @@ public class HearingSession {
 
     public void setParticipants(List<String> participants) {
         this.participants = participants;
+    }
+
+    public List<String> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<String> documents) {
+        this.documents = documents;
     }
 }

@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 import java.util.UUID;
 
 @RestController()
-@RequestMapping("sessions")
+@RequestMapping("icp/sessions")
 public class HearingSessionController {
 
     private HearingSessionService hearingSessionService;
@@ -26,8 +26,8 @@ public class HearingSessionController {
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HearingSession> newSession(
             @RequestBody final HearingSession hearingSession) throws URISyntaxException {
-        String location = "/sessions/" + this.hearingSessionService.newSession(hearingSession).getId();
-        return ResponseEntity.created(new URI(location)).build();
+        String location = "/icp/sessions/" + this.hearingSessionService.newSession(hearingSession).getId();
+        return ResponseEntity.created(new URI(location)).body(hearingSession);
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
