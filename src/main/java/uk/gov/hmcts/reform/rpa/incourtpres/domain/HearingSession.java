@@ -1,0 +1,65 @@
+package uk.gov.hmcts.reform.rpa.incourtpres.domain;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+public class HearingSession {
+
+    private UUID id;
+    private String description;
+    private LocalDateTime dateOfHearing;
+    private List<String> participants;
+
+    public HearingSession(UUID id,
+                          String description,
+                          LocalDateTime dateOfHearing,
+                          List<String> participants) {
+        this.id = id;
+        this.description = description;
+        this.dateOfHearing = dateOfHearing;
+        this.participants = participants;
+    }
+
+    public HearingSession(String description, LocalDateTime dateOfHearing, List<String> participants) {
+        this.description = description;
+        this.dateOfHearing = dateOfHearing;
+        this.participants = participants;
+    }
+
+    public HearingSession() {
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    public LocalDateTime getDateOfHearing() {
+        return dateOfHearing;
+    }
+
+    public List<String> getParticipants() {
+        return participants;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDateOfHearing(LocalDateTime dateOfHearing) {
+        this.dateOfHearing = dateOfHearing;
+    }
+
+    public void setParticipants(List<String> participants) {
+        this.participants = participants;
+    }
+}
