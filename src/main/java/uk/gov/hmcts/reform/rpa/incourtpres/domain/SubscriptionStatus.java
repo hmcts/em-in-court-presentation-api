@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.rpa.incourtpres.controllers;
+package uk.gov.hmcts.reform.rpa.incourtpres.domain;
 
 public enum SubscriptionStatus {
     CONNECTED,

@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.rpa.incourtpres.controllers;
+package uk.gov.hmcts.reform.rpa.incourtpres.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.gov.hmcts.reform.rpa.incourtpres.domain.HearingSession;
+import uk.gov.hmcts.reform.rpa.incourtpres.domain.ParticipantStatus;
 import uk.gov.hmcts.reform.rpa.incourtpres.services.HearingSessionService;
 import uk.gov.hmcts.reform.rpa.incourtpres.services.ParticipantsStatusService;
 

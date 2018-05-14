@@ -17,6 +17,7 @@ import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import uk.gov.hmcts.reform.rpa.incourtpres.IncourtPresApplication;
+import uk.gov.hmcts.reform.rpa.incourtpres.domain.ScreenChange;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

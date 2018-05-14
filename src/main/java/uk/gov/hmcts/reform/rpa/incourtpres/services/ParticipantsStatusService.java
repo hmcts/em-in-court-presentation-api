@@ -1,11 +1,10 @@
 package uk.gov.hmcts.reform.rpa.incourtpres.services;
 
 import org.springframework.stereotype.Service;
-import uk.gov.hmcts.reform.rpa.incourtpres.controllers.ParticipantStatus;
+import uk.gov.hmcts.reform.rpa.incourtpres.domain.ParticipantStatus;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
