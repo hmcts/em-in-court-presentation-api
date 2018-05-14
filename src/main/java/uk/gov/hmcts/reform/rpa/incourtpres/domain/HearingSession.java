@@ -24,7 +24,8 @@ public class HearingSession {
         this.participants = participants;
     }
 
-    public HearingSession(String description, LocalDateTime dateOfHearing, List<String> documents, List<String> participants) {
+    public HearingSession(String description, LocalDateTime dateOfHearing,
+                          List<String> documents, List<String> participants) {
         this.description = description;
         this.dateOfHearing = dateOfHearing;
         this.documents = documents;
