@@ -66,6 +66,8 @@ public class UpdateControllerTest {
         assertThat(screenChange.getDocument(), equalTo("http://doc.com/documents/123"));
     }
 
+
+
     private List<Transport> createTransportClient() {
         List<Transport> transports = new ArrayList<>(1);
         transports.add(new WebSocketTransport(new StandardWebSocketClient()));

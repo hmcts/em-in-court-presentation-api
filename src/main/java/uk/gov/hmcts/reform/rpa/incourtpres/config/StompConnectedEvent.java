@@ -12,6 +12,8 @@ import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import uk.gov.hmcts.reform.rpa.incourtpres.domain.SubscriptionStatus;
 import uk.gov.hmcts.reform.rpa.incourtpres.services.ParticipantsStatusService;
 
+import java.util.Optional;
+
 import static org.springframework.messaging.simp.SimpMessageHeaderAccessor.CONNECT_MESSAGE_HEADER;
 
 @Component

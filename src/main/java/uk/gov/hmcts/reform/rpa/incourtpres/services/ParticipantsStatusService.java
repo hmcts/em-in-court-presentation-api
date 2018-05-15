@@ -11,6 +11,7 @@ import uk.gov.hmcts.reform.rpa.incourtpres.domain.SubscriptionStatus;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Dummy implementation for demo purposes. Obviously in real life this would be saved in a database!!
@@ -20,7 +21,7 @@ public class ParticipantsStatusService {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-    private final Map<String, Map<String, ParticipantStatus>> sessions = new HashMap<>();
+    private final Map<String, Map<String, ParticipantStatus>> sessions = new ConcurrentHashMap<>();
 
     @Autowired
     public ParticipantsStatusService(SimpMessagingTemplate simpMessagingTemplate) {
@@ -30,20 +31,20 @@ public class ParticipantsStatusService {
     public Collection<ParticipantStatus> updateName(String httpSessionId,
                                                     String hearingSessionId,
                                                     String name) {
-        sessions.putIfAbsent(hearingSessionId, new HashMap<>());
+        sessions.putIfAbsent(hearingSessionId, new ConcurrentHashMap<>());
         Map<String, ParticipantStatus> participantStatusMap = sessions.get(hearingSessionId);
         participantStatusMap.computeIfPresent(httpSessionId, (k, v) -> v.updateName(name));
         return participantStatusMap.values();
     }
 
     public Collection<ParticipantStatus> getStatus(String sessionId) {
-        sessions.putIfAbsent(sessionId, new HashMap<>());
+        sessions.putIfAbsent(sessionId, new ConcurrentHashMap<>());
         return sessions.get(sessionId).values();
     }
 
     public void updateStatus(@DestinationVariable("sessionId") String hearingSessionId,
                                                       String httpSessionId, SubscriptionStatus status) {
-        sessions.putIfAbsent(hearingSessionId, new HashMap<>());
+        sessions.putIfAbsent(hearingSessionId, new ConcurrentHashMap<>());
         Map<String, ParticipantStatus> participantStatusMap = sessions.get(hearingSessionId);
         participantStatusMap.computeIfAbsent(httpSessionId, k -> new ParticipantStatus("Anon", hearingSessionId, status));
         participantStatusMap.computeIfPresent(httpSessionId, (k, v) -> new ParticipantStatus(v.getName(), hearingSessionId, status));
