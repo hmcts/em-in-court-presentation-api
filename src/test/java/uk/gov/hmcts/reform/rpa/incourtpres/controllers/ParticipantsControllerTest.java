@@ -100,7 +100,7 @@ public class ParticipantsControllerTest {
         stompSession.subscribe("/topic/participants/" + sessionId, new CreateScreenChangeStompFrameHandler());
 //        stompSession.send("/icp/participants/" + sessionId,
 //                new ParticipantStatus("Louis", sessionId, CONNECTED));
-
+        Thread.sleep(100);
         mvc.perform(get("/icp/sessions/"+ sessionId + "/participants"))
                 .andExpect(jsonPath("$[0].status", equalTo(FOLLOWING.toString())));
     }
@@ -137,6 +137,8 @@ public class ParticipantsControllerTest {
 
         StompSession.Subscription subscription =
                 stompSession.subscribe("/topic/participants/" + sessionId, new CreateScreenChangeStompFrameHandler());
+
+        Thread.sleep(100);
 
         mvc.perform(get("/icp/sessions/"+ sessionId + "/participants"))
                 .andExpect(jsonPath("$[0].status", equalTo(FOLLOWING.toString())));
