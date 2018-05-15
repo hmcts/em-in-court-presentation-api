@@ -12,6 +12,7 @@ import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import uk.gov.hmcts.reform.rpa.incourtpres.domain.SubscriptionStatus;
 import uk.gov.hmcts.reform.rpa.incourtpres.services.ParticipantsStatusService;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.messaging.simp.SimpMessageHeaderAccessor.CONNECT_MESSAGE_HEADER;
@@ -31,14 +32,17 @@ public class StompConnectedEvent implements ApplicationListener<SessionConnected
     public void onApplicationEvent(SessionConnectedEvent event) {
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
         String httpSessionId = sha.getSessionId();
-        String hearingSessionId = extractHearingSessionId(sha);
-        participantsStatusService.updateStatus(hearingSessionId,
-                httpSessionId, SubscriptionStatus.CONNECTED);
+        Optional<String> hearingSessionId = extractHearingSessionId(sha);
+        hearingSessionId.ifPresent(s -> {
+            participantsStatusService.updateStatus(s,
+                    httpSessionId, SubscriptionStatus.CONNECTED);
+        });
     }
 
-    private String extractHearingSessionId(StompHeaderAccessor sha) {
+    private Optional<String> extractHearingSessionId(StompHeaderAccessor sha) {
         StompHeaderAccessor simpConnectMessage =
                 StompHeaderAccessor.wrap((Message<?>) sha.getHeader(CONNECT_MESSAGE_HEADER));
-        return simpConnectMessage.getNativeHeader("sessionId").get(0);
+        List<String> sessionId = simpConnectMessage.getNativeHeader("sessionId");
+        return Optional.ofNullable(sessionId.isEmpty() ? null: sessionId.get(0));
     }
 }
