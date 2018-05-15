@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+import org.springframework.web.socket.messaging.SessionUnsubscribeEvent;
 import uk.gov.hmcts.reform.rpa.incourtpres.services.ParticipantsStatusService;
 
 @Component
-public class StompDisconnectedEvent implements ApplicationListener<SessionDisconnectEvent> {
+public class StompUnsubscribedEvent implements ApplicationListener<SessionUnsubscribeEvent> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(StompDisconnectedEvent.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StompUnsubscribedEvent.class);
 
     private final ParticipantsStatusService participantsStatusService;
 
     @Autowired
-    public StompDisconnectedEvent(ParticipantsStatusService participantsStatusService) {
+    public StompUnsubscribedEvent(ParticipantsStatusService participantsStatusService) {
         this.participantsStatusService = participantsStatusService;
     }
 
-    public void onApplicationEvent(SessionDisconnectEvent event) {
+    public void onApplicationEvent(SessionUnsubscribeEvent event) {
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
         String sessionId = sha.getSessionId();
         LOG.info(sessionId);
-        participantsStatusService.removeParticipant(sessionId);
+        participantsStatusService.unsubscribeParticipant(sessionId);
     }
 }

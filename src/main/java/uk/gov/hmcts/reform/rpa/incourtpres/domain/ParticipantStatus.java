@@ -28,4 +28,12 @@ public class ParticipantStatus {
     public String getSessionId() {
         return sessionId;
     }
+
+    public ParticipantStatus updateName(String name) {
+        return new ParticipantStatus(name, this.sessionId, this.status);
+    }
+
+    public ParticipantStatus updateStatus(SubscriptionStatus status) {
+        return new ParticipantStatus(name, this.sessionId, status);
+    }
 }
