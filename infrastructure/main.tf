@@ -2,8 +2,6 @@ locals {
   app_full_name = "${var.product}-${var.component}"
   ase_name = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
   local_env = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env}"
-  prod_hostname = "${local.app_full_name}.platform.hmcts.net"
-  non_prod_hostname = "${local.app_full_name}.${var.env}.platform.hmcts.net"
 }
 # "${local.ase_name}"
 # "${local.app_full_name}"
