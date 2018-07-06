@@ -17,6 +17,7 @@ module "app" {
   https_only          = "false"
   capacity            = "${var.capacity}"
   web_sockets_enabled = "true"
+  common_tags  = "${var.common_tags}"
 
   app_settings = {
     POSTGRES_HOST = "${module.db.host_name}"
