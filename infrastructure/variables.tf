@@ -32,7 +32,7 @@ variable "subscription" {
 }
 
 variable "capacity" {
-  default = "2"
+  default = "1"
 }
 
 variable "ilbIp"{}
@@ -57,10 +57,6 @@ variable "java_opts" {
 ////////////////////////////////////////////////
 // Endpoints
 ////////////////////////////////////////////////
-variable "vault_section" {
-  default = "preprod"
-}
-
 variable "s2s_url" {
   default = "rpe-service-auth-provider"
 }
@@ -73,8 +69,12 @@ variable "postgresql_user" {
   default = "icp"
 }
 
+variable "database_name" {
+  default = "incourtpres"
+}
+
 variable "s2s_names_whitelist" {
-  default = "em_gw"
+  default = "em_gw,jui_webapp,pui_webapp"
 }
 
 ////////////////////////////////////////////////
