@@ -1,14 +1,14 @@
 #!groovy
 
 properties([
-    [
-        $class: 'GithubProjectProperty',
-        displayName: 'Document Management Store App',
-        projectUrlStr: 'https://github.com/hmcts/document-management-store-app'
-    ],
-    pipelineTriggers([
-        [$class: 'GitHubPushTrigger']
-    ])
+        [
+                $class: 'GithubProjectProperty',
+                displayName: 'Document Management Store App',
+                projectUrlStr: 'https://github.com/hmcts/document-management-store-app'
+        ],
+        pipelineTriggers([
+                [$class: 'GitHubPushTrigger']
+        ])
 ])
 
 @Library("Infrastructure")
@@ -20,7 +20,7 @@ def component = "icp"
 def channel = '#rpa-pipeline'
 
 List<LinkedHashMap<String, Object>> secrets = [
-    secret('s2s-token', 'S2S_TOKEN')
+        secret('jui-s2s-token', 'S2S_TOKEN')
 ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
