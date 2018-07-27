@@ -57,24 +57,12 @@ variable "java_opts" {
 ////////////////////////////////////////////////
 // Endpoints
 ////////////////////////////////////////////////
-variable "s2s_url" {
-  default = "rpe-service-auth-provider"
-}
-
-variable "dm_store_app_url" {
-  default = "dm-store"
-}
-
 variable "postgresql_user" {
   default = "icp"
 }
 
 variable "database_name" {
   default = "incourtpres"
-}
-
-variable "s2s_names_whitelist" {
-  default = "em_gw,jui_webapp,pui_webapp"
 }
 
 ////////////////////////////////////////////////
