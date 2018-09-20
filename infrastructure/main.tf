@@ -9,7 +9,7 @@ locals {
 # "${local.local_env}"
 
 module "app" {
-  source = "git@github.com:hmcts/moj-module-webapp?ref=master"
+  source = "git@github.com:hmcts/cnp-module-webapp?ref=master"
   product = "${local.app_full_name}"
   location = "${var.location}"
   env = "${var.env}"
@@ -21,6 +21,8 @@ module "app" {
   https_only="false"
   web_sockets_enabled = "true"
   common_tags  = "${var.common_tags}"
+  asp_rg = "${var.shared_product_name}-${var.env}"
+  asp_name = "${var.shared_product_name}-${var.env}"
 
   app_settings = {
     POSTGRES_HOST = "${module.db.host_name}"
@@ -39,6 +41,10 @@ module "app" {
     SPRING_DATASOURCE_PASSWORD = "${module.db.postgresql_password}"
 
     ENABLE_DB_MIGRATE="false"
+
+    # idam
+    IDAM_API_BASE_URI = "${var.idam_api_url}"
+    S2S_BASE_URI = "http://${var.s2s_url}-${local.local_env}.service.core-compute-${local.local_env}.internal"
 
     # logging vars & healthcheck
     REFORM_SERVICE_NAME = "${local.app_full_name}"
@@ -79,12 +85,12 @@ data "azurerm_key_vault" "shared_key_vault" {
 }
 
 data "azurerm_key_vault_secret" "s2s_secret" {
-  name = "jui-s2s-token"
+  name = "em-s2s-token"
   vault_uri = "${data.azurerm_key_vault.shared_key_vault.vault_uri}"
 }
 
 data "azurerm_key_vault_secret" "oauth2_secret" {
-  name = "jui-oauth2-token"
+  name = "show-oauth2-token"
   vault_uri = "${data.azurerm_key_vault.shared_key_vault.vault_uri}"
 }
 

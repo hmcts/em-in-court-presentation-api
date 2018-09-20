@@ -31,17 +31,13 @@ variable "subscription" {
   type = "string"
 }
 
-variable "capacity" {
-  default = "1"
-}
-
 variable "ilbIp"{}
 
 variable "tenant_id" {}
 
 variable "jenkins_AAD_objectId" {
-  type                        = "string"
-  description                 = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
+  type = "string"
+  description = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
 
 variable "common_tags" {
@@ -50,6 +46,9 @@ variable "common_tags" {
 ////////////////////////////////////////////////
 //Addtional Vars ///////////////////////////////
 ////////////////////////////////////////////////
+variable "capacity" {
+  default = "1"
+}
 
 variable "java_opts" {
   default = ""
@@ -57,6 +56,14 @@ variable "java_opts" {
 ////////////////////////////////////////////////
 // Endpoints
 ////////////////////////////////////////////////
+variable "idam_api_url" {
+  default = "http://betaDevBccidamAppLB.reform.hmcts.net:80"
+}
+
+variable "s2s_url" {
+  default = "rpe-service-auth-provider"
+}
+
 variable "postgresql_user" {
   default = "icp"
 }
@@ -64,7 +71,6 @@ variable "postgresql_user" {
 variable "database_name" {
   default = "incourtpres"
 }
-
 ////////////////////////////////////////////////
 // Logging
 ////////////////////////////////////////////////
